@@ -4,7 +4,7 @@ plugins {
     java
     idea
     id("io.spring.dependency-management")
-    id("org.springframework.boot")
+    id("org.springframework.boot") apply false
 }
 
 idea {
