@@ -1,12 +1,10 @@
 package ru.otus.model;
 
 import java.time.LocalDate;
-import lombok.Value;
-import lombok.experimental.NonFinal;
+import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
-@Value
-@NonFinal
+@Data
 @SuperBuilder(toBuilder = true)
 public class Person {
     String firstName;
