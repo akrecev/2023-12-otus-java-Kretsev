@@ -15,6 +15,7 @@ pluginManagement {
     val protobufVer: String by settings
     val sonarlint: String by settings
     val spotless: String by settings
+    val freeFair: String by settings
 
     plugins {
         id("fr.brouillard.oss.gradle.jgitver") version jgitver
@@ -25,6 +26,8 @@ pluginManagement {
         id("com.google.protobuf") version protobufVer
         id("name.remal.sonarlint") version sonarlint
         id("com.diffplug.spotless") version spotless
+        id ("io.freefair.lombok") version freeFair
     }
 }
 include("hw02-logging")
+include("hw07-lombok")
