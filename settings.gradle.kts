@@ -5,6 +5,9 @@ include("hw03-qa")
 include("hw04-generics")
 include("hw05-collections")
 include("hw06-annotations")
+include("hw07-lombok")
+include("hw08-gc:demo")
+include("hw08-gc:homework")
 
 pluginManagement {
     val jgitver: String by settings
@@ -30,4 +33,3 @@ pluginManagement {
     }
 }
 include("hw02-logging")
-include("hw07-lombok")
