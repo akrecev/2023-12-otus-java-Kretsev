@@ -8,7 +8,6 @@ class App {
     public static void main(String[] args) throws ClassNotFoundException {
         log.debug("Starting application...");
 
-        TestFramework testFramework = new TestFramework("ru.otus.homework.test.UserServiceTest");
-        testFramework.runTest();
+        TestFramework.runTest("ru.otus.homework.test.UserServiceTest");
     }
 }

@@ -1,65 +1,70 @@
 package ru.otus.homework.framework;
 
+import static ru.otus.homework.annotations.TestAnnotationName.*;
+
 import java.lang.reflect.Method;
-import java.util.LinkedList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
+import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import ru.otus.homework.annotations.After;
 import ru.otus.homework.annotations.Before;
 import ru.otus.homework.annotations.Test;
+import ru.otus.homework.annotations.TestAnnotationName;
 import ru.otus.reflection.ReflectionHelper;
 
+@UtilityClass
 @Slf4j
 public class TestFramework {
-    private final Class<?> clazz;
-    private final List<Method> beforeMethodList = new LinkedList<>();
-    private final List<Method> testMethodList = new LinkedList<>();
-    private final List<Method> afterMethodList = new LinkedList<>();
-    private int passed;
-    private int failed;
+    public static void runTest(String className) throws ClassNotFoundException {
+        Class<?> testingClass = Class.forName(className);
+        Object testingEntity = ReflectionHelper.instantiate(testingClass);
+        Map<TestAnnotationName, List<Method>> methods = getMethods(testingClass);
+        int passed = 0;
+        int failed = 0;
+        for (Method testMethod : methods.get(TEST)) {
+            try {
+                methods.get(BEFORE).forEach(method -> ReflectionHelper.callMethod(testingEntity, method.getName()));
+                ReflectionHelper.callMethod(testingEntity, testMethod.getName());
+                passed++;
 
-    public TestFramework(String className) throws ClassNotFoundException {
-        this.clazz = Class.forName(className);
-    }
+                log.debug("execute method: {}", testMethod.getName());
 
-    public void runTest() {
-        getMethods();
+            } catch (Exception e) {
+                failed++;
 
-        for (Method method : testMethodList) {
-            executeTestMethod(method);
+                log.debug("failed method: {}", testMethod.getName());
+
+            } finally {
+                methods.get(AFTER).forEach(method -> ReflectionHelper.callMethod(testingEntity, method.getName()));
+            }
         }
         log.debug("Tests passed: {}, tests failed: {}, total: {}", passed, failed, passed + failed);
     }
 
-    private void getMethods() {
-        for (Method method : clazz.getDeclaredMethods()) {
+    private static Map<TestAnnotationName, List<Method>> getMethods(Class<?> testingClass) {
+        Map<TestAnnotationName, List<Method>> methods = new EnumMap<>(TestAnnotationName.class);
+        for (Method method : testingClass.getDeclaredMethods()) {
             if (method.isAnnotationPresent(Before.class)) {
-                beforeMethodList.add(method);
+                putMethod(methods, BEFORE, method);
             } else if (method.isAnnotationPresent(Test.class)) {
-                testMethodList.add(method);
+                putMethod(methods, TEST, method);
             } else if (method.isAnnotationPresent(After.class)) {
-                afterMethodList.add(method);
+                putMethod(methods, AFTER, method);
             }
         }
+        return methods;
     }
 
-    private void executeTestMethod(Method testMethod) {
-        Object testingEntity = ReflectionHelper.instantiate(clazz);
-
-        try {
-            beforeMethodList.forEach(method -> ReflectionHelper.callMethod(testingEntity, method.getName()));
-            ReflectionHelper.callMethod(testingEntity, testMethod.getName());
-            passed++;
-
-            log.debug("execute method: {}", testMethod.getName());
-
-        } catch (Exception e) {
-            failed++;
-
-            log.debug("failed method: {}", testMethod.getName());
-
-        } finally {
-            afterMethodList.forEach(method -> ReflectionHelper.callMethod(testingEntity, method.getName()));
-        }
+    private static void putMethod(
+            Map<TestAnnotationName, List<Method>> methods, TestAnnotationName annotationName, Method method) {
+        methods.put(
+                annotationName,
+                methods.get(annotationName) == null
+                        ? List.of(method)
+                        : Stream.concat(methods.get(annotationName).stream(), Stream.of(method))
+                                .toList());
     }
 }
