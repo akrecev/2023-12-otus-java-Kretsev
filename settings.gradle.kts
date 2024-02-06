@@ -9,6 +9,7 @@ include("hw07-lombok")
 include("hw08-gc:demo")
 include("hw08-gc:homework")
 include("hw09-docker")
+include("hw10-byteCodes")
 
 pluginManagement {
     val jgitver: String by settings
