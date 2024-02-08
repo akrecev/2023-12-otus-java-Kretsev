@@ -21,6 +21,24 @@ public class TestFramework {
     public static void runTest(String className) throws ClassNotFoundException {
         Class<?> testingClass = Class.forName(className);
         Map<TestAnnotationName, List<Method>> methods = getMethods(testingClass);
+        runTestMethods(methods, testingClass);
+    }
+
+    private static Map<TestAnnotationName, List<Method>> getMethods(Class<?> testingClass) {
+        Map<TestAnnotationName, List<Method>> methods = new EnumMap<>(TestAnnotationName.class);
+        for (Method method : testingClass.getDeclaredMethods()) {
+            if (method.isAnnotationPresent(Before.class)) {
+                putMethod(methods, BEFORE, method);
+            } else if (method.isAnnotationPresent(Test.class)) {
+                putMethod(methods, TEST, method);
+            } else if (method.isAnnotationPresent(After.class)) {
+                putMethod(methods, AFTER, method);
+            }
+        }
+        return methods;
+    }
+
+    private static void runTestMethods(Map<TestAnnotationName, List<Method>> methods, Class<?> testingClass) {
         int passed = 0;
         int failed = 0;
         for (Method testMethod : methods.get(TEST)) {
@@ -42,20 +60,6 @@ public class TestFramework {
             }
         }
         log.debug("Tests passed: {}, tests failed: {}, total: {}", passed, failed, passed + failed);
-    }
-
-    private static Map<TestAnnotationName, List<Method>> getMethods(Class<?> testingClass) {
-        Map<TestAnnotationName, List<Method>> methods = new EnumMap<>(TestAnnotationName.class);
-        for (Method method : testingClass.getDeclaredMethods()) {
-            if (method.isAnnotationPresent(Before.class)) {
-                putMethod(methods, BEFORE, method);
-            } else if (method.isAnnotationPresent(Test.class)) {
-                putMethod(methods, TEST, method);
-            } else if (method.isAnnotationPresent(After.class)) {
-                putMethod(methods, AFTER, method);
-            }
-        }
-        return methods;
     }
 
     private static void putMethod(
