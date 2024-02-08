@@ -20,11 +20,11 @@ import ru.otus.reflection.ReflectionHelper;
 public class TestFramework {
     public static void runTest(String className) throws ClassNotFoundException {
         Class<?> testingClass = Class.forName(className);
-        Object testingEntity = ReflectionHelper.instantiate(testingClass);
         Map<TestAnnotationName, List<Method>> methods = getMethods(testingClass);
         int passed = 0;
         int failed = 0;
         for (Method testMethod : methods.get(TEST)) {
+            Object testingEntity = ReflectionHelper.instantiate(testingClass);
             try {
                 methods.get(BEFORE).forEach(method -> ReflectionHelper.callMethod(testingEntity, method.getName()));
                 ReflectionHelper.callMethod(testingEntity, testMethod.getName());
