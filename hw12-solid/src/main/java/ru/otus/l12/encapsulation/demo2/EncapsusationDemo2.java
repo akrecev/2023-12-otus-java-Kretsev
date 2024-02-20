@@ -23,5 +23,4 @@ public class EncapsusationDemo2 {
             System.out.println(department);
         }
     }
-
 }

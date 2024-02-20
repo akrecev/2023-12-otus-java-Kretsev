@@ -11,7 +11,7 @@ public class Demo {
         Visitor visitor = new CarService();
         elements.forEach(elem -> elem.accept(visitor));
 
-    //    Visitor visitorVip = new CarServiceVip();
-    //    elements.forEach(elem -> elem.accept(visitorVip));
+        //    Visitor visitorVip = new CarServiceVip();
+        //    elements.forEach(elem -> elem.accept(visitorVip));
     }
 }

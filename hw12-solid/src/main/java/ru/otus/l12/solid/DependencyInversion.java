@@ -6,13 +6,9 @@ package ru.otus.l12.solid;
  */
 public class DependencyInversion {
 
-    interface SteeringWheel {
+    interface SteeringWheel {}
 
-    }
-
-    interface Engine {
-
-    }
+    interface Engine {}
 
     /*неправильно*/
     class CarInvalid {
@@ -36,11 +32,7 @@ public class DependencyInversion {
         }
     }
 
-    class GasEngine implements Engine {
-    }
+    class GasEngine implements Engine {}
 
-    class GenericWheel implements SteeringWheel {
-    }
+    class GenericWheel implements SteeringWheel {}
 }
-
-

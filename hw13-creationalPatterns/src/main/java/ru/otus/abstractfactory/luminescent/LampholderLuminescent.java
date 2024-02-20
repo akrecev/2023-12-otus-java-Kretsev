@@ -7,8 +7,8 @@ import ru.otus.abstractfactory.Lampholder;
  * created on 18.09.18.
  */
 public class LampholderLuminescent implements Lampholder {
-  @Override
-  public void hold() {
-    System.out.println("Luminescent hold");
-  }
+    @Override
+    public void hold() {
+        System.out.println("Luminescent hold");
+    }
 }

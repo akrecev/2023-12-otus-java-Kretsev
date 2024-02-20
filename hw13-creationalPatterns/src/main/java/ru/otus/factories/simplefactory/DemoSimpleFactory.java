@@ -55,5 +55,4 @@ public class DemoSimpleFactory {
     private static void readData(Configuration config) {
         System.out.println(config.params());
     }
-
 }

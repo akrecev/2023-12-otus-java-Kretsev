@@ -26,5 +26,4 @@ public class Demo {
         new Demo(configuration(new LedStrategy()));
         new Demo(configuration(new LuminescentStrategy()));
     }
-
 }

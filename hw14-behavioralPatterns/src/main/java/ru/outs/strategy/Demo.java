@@ -1,6 +1,5 @@
 package ru.outs.strategy;
 
-
 public class Demo {
     public static void main(String[] args) {
         var context = new Context();

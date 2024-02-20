@@ -1,6 +1,5 @@
 package ru.otus.l12.solid;
 
-
 /**
  * @author sergey
  * created on 09.09.19.
@@ -26,12 +25,12 @@ public class InterfaceSegregation {
 
         @Override
         public void pedal() {
-            //что-то делается
+            // что-то делается
         }
 
         @Override
         public void keepBalance() {
-            //что-то делается
+            // что-то делается
         }
 
         @Override

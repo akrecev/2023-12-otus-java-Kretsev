@@ -1,11 +1,10 @@
 package ru.otus.objectpool;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
-import static java.util.concurrent.TimeUnit.SECONDS;
 
 /**
  * Примеры Object Poll в JDK.
@@ -46,8 +45,7 @@ public class DemoJdk {
 
         // Отложенный, периодический запуск
         ScheduledExecutorService scheduled = Executors.newScheduledThreadPool(1);
-        scheduled.scheduleAtFixedRate(
-                () -> System.out.println("Hello from ScheduledThreadPool"), 0, 1, SECONDS);
+        scheduled.scheduleAtFixedRate(() -> System.out.println("Hello from ScheduledThreadPool"), 0, 1, SECONDS);
 
         Thread.sleep(SECONDS.toMillis(5));
         scheduled.shutdown();

@@ -1,9 +1,9 @@
 package ru.otus.builder;
 
+import static java.util.Calendar.MONDAY;
+
 import java.util.Calendar;
 import java.util.Locale;
-
-import static java.util.Calendar.MONDAY;
 
 /**
  * Примеры builder в JDK.
@@ -11,10 +11,7 @@ import static java.util.Calendar.MONDAY;
 public class DemoJdk {
     public static void main(String[] args) {
         // Locale
-        Locale locale = new Locale.Builder()
-                .setLanguage("ru")
-                .setRegion("RU")
-                .build();
+        Locale locale = new Locale.Builder().setLanguage("ru").setRegion("RU").build();
 
         // Calendar
         Calendar cal = new Calendar.Builder()
@@ -34,10 +31,7 @@ public class DemoJdk {
         System.out.println(str);
 
         // fluent
-        StringBuilder builder2 = new StringBuilder()
-                .append("aa ")
-                .append("bb ")
-                .append("cc");
+        StringBuilder builder2 = new StringBuilder().append("aa ").append("bb ").append("cc");
 
         String str2 = builder2.toString();
 

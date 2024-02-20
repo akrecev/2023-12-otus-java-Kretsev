@@ -15,7 +15,6 @@ public class DemoStaticFactoryMethod {
         var otp2 = Optional.of("Some String");
         var opt3 = Optional.ofNullable(null);
 
-
         Collection<?> originalCollection = null;
         List<Integer> originalList = null;
         Map<String, Integer> originalMap = null;

@@ -29,16 +29,15 @@ public class ObjectPool<T> {
 
         T obj = free.poll();
         if (obj == null) {
-            if (used.size() == this.maxSize)
-                throw new ObjectPoolMaxSizeException(maxSize);
+            if (used.size() == this.maxSize) throw new ObjectPoolMaxSizeException(maxSize);
 
             obj = objectFactory.create();
             pooledObjectInitializer.accept(obj);
         }
         used.offer(obj);
 
-        System.out.printf("get() free=%d used=%d | free=%d used=%d\n",
-                freeBefore, usedBefore, free.size(), used.size());
+        System.out.printf(
+                "get() free=%d used=%d | free=%d used=%d\n", freeBefore, usedBefore, free.size(), used.size());
         return obj;
     }
 
@@ -52,8 +51,8 @@ public class ObjectPool<T> {
         used.remove(obj);
         free.add(obj);
 
-        System.out.printf("release() free=%d used=%d | free=%d used=%d\n",
-                freeBefore, usedBefore, free.size(), used.size());
+        System.out.printf(
+                "release() free=%d used=%d | free=%d used=%d\n", freeBefore, usedBefore, free.size(), used.size());
     }
 
     /**
@@ -73,5 +72,3 @@ class ObjectPoolMaxSizeException extends RuntimeException {
         super("Cannot create object. Reached maximum pool size of " + maxSize + " objects.");
     }
 }
-
-

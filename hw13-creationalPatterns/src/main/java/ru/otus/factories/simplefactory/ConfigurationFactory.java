@@ -6,13 +6,13 @@ package ru.otus.factories.simplefactory;
  */
 class ConfigurationFactory {
 
-  static Configuration getConfiguration(String param) {
-    if ("file".equals(param)) {
-      return new ConfigurationFile();
+    static Configuration getConfiguration(String param) {
+        if ("file".equals(param)) {
+            return new ConfigurationFile();
+        }
+        if ("db".equals(param)) {
+            return new ConfigurationDB();
+        }
+        throw new IllegalArgumentException("unknown param:" + param);
     }
-    if ("db".equals(param)) {
-      return new ConfigurationDB();
-    }
-    throw new IllegalArgumentException("unknown param:" + param);
-  }
 }

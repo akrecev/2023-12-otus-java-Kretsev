@@ -1,8 +1,7 @@
 package ru.otus.singleton;
 
 public class FirstSingleton {
-    private static FirstSingleton instance =
-            new FirstSingleton();
+    private static FirstSingleton instance = new FirstSingleton();
 
     // ! private constructor
     private FirstSingleton() {

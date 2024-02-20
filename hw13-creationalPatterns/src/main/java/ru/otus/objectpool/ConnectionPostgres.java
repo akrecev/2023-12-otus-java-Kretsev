@@ -20,5 +20,4 @@ public class ConnectionPostgres implements Connection {
             new RuntimeException(e);
         }
     }
-
 }

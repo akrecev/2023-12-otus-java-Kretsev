@@ -5,8 +5,8 @@ package ru.otus.factories.simplefactory;
  * created on 19.09.18.
  */
 public class ConfigurationDB implements Configuration {
-  @Override
-  public String params() {
-    return "params from DB";
-  }
+    @Override
+    public String params() {
+        return "params from DB";
+    }
 }

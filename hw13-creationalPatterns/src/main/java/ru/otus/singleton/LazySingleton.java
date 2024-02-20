@@ -2,6 +2,7 @@ package ru.otus.singleton;
 
 public class LazySingleton {
     private static LazySingleton instance = null;
+
     private LazySingleton() {
         System.out.println("run constructor");
     }

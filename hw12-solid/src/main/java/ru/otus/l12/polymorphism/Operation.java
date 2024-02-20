@@ -6,5 +6,5 @@ package ru.otus.l12.polymorphism;
  */
 public interface Operation {
 
-  void action(String data);
+    void action(String data);
 }

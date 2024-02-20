@@ -5,7 +5,7 @@ package ru.otus.objectpool;
  * created on 19.09.18.
  */
 public interface Connection {
-  void connect();
+    void connect();
 
-  void execSelect();
+    void execSelect();
 }

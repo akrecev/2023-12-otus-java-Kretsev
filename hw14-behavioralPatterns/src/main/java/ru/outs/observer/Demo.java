@@ -11,8 +11,7 @@ public class Demo {
         var list = new ArrayList<Integer>();
         list.add(1);
         for (var i : list) {
-            if (i == 1)
-                list.add(2);
+            if (i == 1) list.add(2);
         }
 
         Boolean[] first = {true};
@@ -27,18 +26,18 @@ public class Demo {
 
         producer.addListener(temp);
         producer.addListener(consumerA);
-        //producer.addListener(consumerB.getListener());
+        // producer.addListener(consumerB.getListener());
 
         producer.event("eventA");
-        //producer.event("eventB");
+        // producer.event("eventB");
 
-        //producer.removeListener(temp);
+        // producer.removeListener(temp);
 
-        //Критически важно удалять, когда не нужны
-        //producer.removeListener(consumerA);
-        //producer.removeListener(consumerB.getListener());
+        // Критически важно удалять, когда не нужны
+        // producer.removeListener(consumerA);
+        // producer.removeListener(consumerB.getListener());
 
-        //producer.event("eventC");
-        //producer.event("eventD");
+        // producer.event("eventC");
+        // producer.event("eventD");
     }
 }

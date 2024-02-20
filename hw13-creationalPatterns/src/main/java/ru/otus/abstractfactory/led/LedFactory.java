@@ -9,13 +9,13 @@ import ru.otus.abstractfactory.Lampholder;
  * created on 17.09.18.
  */
 public class LedFactory implements AbstractFactory {
-  @Override
-  public Bulb createBulb() {
-    return new BulbLed();
-  }
+    @Override
+    public Bulb createBulb() {
+        return new BulbLed();
+    }
 
-  @Override
-  public Lampholder createLampholder() {
-    return new LampholderLed();
-  }
+    @Override
+    public Lampholder createLampholder() {
+        return new LampholderLed();
+    }
 }

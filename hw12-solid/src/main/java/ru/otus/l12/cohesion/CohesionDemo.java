@@ -12,45 +12,33 @@ class A {
     // Инициализация message опущена
 
     public void process() {
-        //...
+        // ...
         send();
     }
 
-
-
-
-
-
-
-
-
-
     private void send() {
         // ... Здесь может быть какая-то логика...
-        System.out.println(
-                "Send: " + this.message);
+        System.out.println("Send: " + this.message);
     }
 }
-
-
 
 class B {
     private String message;
     // Инициализация message опущена
 
-//    public  B(String message){
-//        this.message = message;
-//    }
+    //    public  B(String message){
+    //        this.message = message;
+    //    }
     public void process() {
-        //...
+        // ...
         Helper.send(this.message);
     }
 
-//    private void send(String message) {
-//        // ... Здесь может быть какая-то логика...
-//        System.out.println(
-//                "Send: " + message);
-//    }
+    //    private void send(String message) {
+    //        // ... Здесь может быть какая-то логика...
+    //        System.out.println(
+    //                "Send: " + message);
+    //    }
 }
 
 // См. еще код ниже
@@ -58,19 +46,6 @@ class B {
 class Helper {
     public static void send(String message) {
         // ... Здесь может быть какая-то логика...
-        System.out.println(
-                "Send: " + message);
+        System.out.println("Send: " + message);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
