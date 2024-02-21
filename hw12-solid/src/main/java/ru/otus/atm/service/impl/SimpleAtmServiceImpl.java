@@ -14,7 +14,7 @@ public class SimpleAtmServiceImpl implements AtmService {
     @Override
     public int depositMoney(Map<Banknote, Integer> banknotes) {
         return storage.putTheMoney(banknotes).entrySet().stream()
-                .mapToInt(e -> e.getKey().value * e.getValue())
+                .mapToInt(e -> e.getKey().nominal * e.getValue())
                 .sum();
     }
 
@@ -22,18 +22,27 @@ public class SimpleAtmServiceImpl implements AtmService {
     public int getMoney(int sum) {
         checkMultiple10(sum);
         for (Map.Entry<Banknote, Integer> banknotes : storage.showMeTheMoney().entrySet()) {
-            int amount = sum / banknotes.getValue();
-            banknotes.setValue(banknotes.getValue() + amount);
-            sum -= (banknotes.getValue() * amount);
+            int requiredAmount = sum / banknotes.getKey().nominal;
+
+            if (banknotes.getValue() < requiredAmount) {
+                sum -= banknotes.getKey().nominal * banknotes.getValue();
+                banknotes.setValue(0);
+            } else {
+                sum -= banknotes.getKey().nominal * requiredAmount;
+                banknotes.setValue(banknotes.getValue() - requiredAmount);
+            }
         }
 
-        return 0;
+        if (sum > 0) {
+            throw new NotEnoughBanknotes("Not enough banknotes for this sum");
+        }
+        return showMoney();
     }
 
     @Override
     public int showMoney() {
         return storage.showMeTheMoney().entrySet().stream()
-                .mapToInt(e -> e.getKey().value * e.getValue())
+                .mapToInt(e -> e.getKey().nominal * e.getValue())
                 .sum();
     }
 

@@ -8,9 +8,9 @@ public enum Banknote {
     BN_50(50),
     BN_10(10);
 
-    public final int value;
+    public final int nominal;
 
-    Banknote(int value) {
-        this.value = value;
+    Banknote(int nominal) {
+        this.nominal = nominal;
     }
 }
