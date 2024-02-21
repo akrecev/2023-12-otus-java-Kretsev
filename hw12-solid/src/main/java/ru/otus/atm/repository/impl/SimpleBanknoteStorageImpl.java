@@ -11,7 +11,8 @@ public class SimpleBanknoteStorageImpl implements BanknoteStorage {
 
     @Override
     public Map<Banknote, Integer> putTheMoney(Map<Banknote, Integer> sum) {
-        sum.forEach((k, v) -> banknoteStorageMap.put(k, banknoteStorageMap.get(k) + v));
+        sum.forEach((k, v) ->
+                banknoteStorageMap.put(k, banknoteStorageMap.get(k) == null ? v : banknoteStorageMap.get(k) + v));
 
         return showMeTheMoney();
     }
