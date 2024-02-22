@@ -1,9 +1,11 @@
 package ru.otus.atm.service.impl;
 
+import static ru.otus.atm.utility.Validator.*;
+
 import java.util.EnumMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
-import ru.otus.atm.exception.NotEnoughBanknotes;
+import ru.otus.atm.exception.NotEnoughBanknotesException;
 import ru.otus.atm.model.Banknote;
 import ru.otus.atm.repository.BanknoteStorage;
 import ru.otus.atm.service.AtmService;
@@ -21,7 +23,7 @@ public class SimpleAtmServiceImpl implements AtmService {
 
     @Override
     public int getMoney(int sum) {
-        checkMultiple10(sum);
+        validation(sum);
         Map<Banknote, Integer> receivedMoney = new EnumMap<>(Banknote.class);
         for (Map.Entry<Banknote, Integer> banknotes : storage.showMeTheMoney().entrySet()) {
             int requiredAmount = sum / banknotes.getKey().nominal;
@@ -37,7 +39,7 @@ public class SimpleAtmServiceImpl implements AtmService {
         }
 
         if (sum > 0) {
-            throw new NotEnoughBanknotes("Not enough banknotes for this sum");
+            throw new NotEnoughBanknotesException("Not enough banknotes for this sum");
         }
 
         storage.giveMeTheMoney(receivedMoney);
@@ -50,11 +52,5 @@ public class SimpleAtmServiceImpl implements AtmService {
         return storage.showMeTheMoney().entrySet().stream()
                 .mapToInt(e -> e.getKey().nominal * e.getValue())
                 .sum();
-    }
-
-    private void checkMultiple10(int sum) {
-        if (sum % 10 != 0) {
-            throw new NotEnoughBanknotes("Required sum multiple 10");
-        }
     }
 }

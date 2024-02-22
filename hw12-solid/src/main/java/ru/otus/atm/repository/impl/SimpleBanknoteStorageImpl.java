@@ -2,7 +2,7 @@ package ru.otus.atm.repository.impl;
 
 import java.util.EnumMap;
 import java.util.Map;
-import ru.otus.atm.exception.NotEnoughBanknotes;
+import ru.otus.atm.exception.NotEnoughBanknotesException;
 import ru.otus.atm.model.Banknote;
 import ru.otus.atm.repository.BanknoteStorage;
 
@@ -21,7 +21,7 @@ public class SimpleBanknoteStorageImpl implements BanknoteStorage {
     public Map<Banknote, Integer> giveMeTheMoney(Map<Banknote, Integer> sum) {
         for (Map.Entry<Banknote, Integer> banknotes : sum.entrySet()) {
             if (banknoteStorageMap.get(banknotes.getKey()) - banknotes.getValue() < 0) {
-                throw new NotEnoughBanknotes("Not enough banknotes");
+                throw new NotEnoughBanknotesException("Not enough banknotes nominal " + banknotes.getKey().nominal);
             }
         }
         sum.forEach((k, v) -> banknoteStorageMap.put(k, banknoteStorageMap.get(k) - v));
