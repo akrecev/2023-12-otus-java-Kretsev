@@ -83,7 +83,10 @@ subprojects {
         options.compilerArgs.addAll(listOf("-Xlint:all,-serial,-processing"))
     }
 
-    apply<name.remal.gradle_plugins.sonarlint.SonarLintPlugin>()
+    if (project.name.startsWith("hw0")) {
+        apply<name.remal.gradle_plugins.sonarlint.SonarLintPlugin>()
+    }
+
     apply<com.diffplug.gradle.spotless.SpotlessPlugin>()
     configure<com.diffplug.gradle.spotless.SpotlessExtension> {
         java {
