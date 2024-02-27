@@ -1,18 +1,24 @@
 package ru.otus.atm.utility;
 
+import java.util.Arrays;
 import lombok.experimental.UtilityClass;
 import ru.otus.atm.exception.BadRequestException;
+import ru.otus.atm.model.Banknote;
 
 @UtilityClass
 public class Validator {
     public static void validation(int sum) {
-        checkMultiple10(sum);
         checkNotNegative(sum);
+        checkMultipleMinNominal(sum);
     }
 
-    private static void checkMultiple10(int sum) {
-        if (sum % 10 != 0) {
-            throw new BadRequestException("Required sum multiple 10");
+    private static void checkMultipleMinNominal(int sum) {
+        int minBanknoteValue = Arrays.stream(Banknote.values())
+                .map(b -> b.nominal)
+                .min(Integer::compareTo)
+                .orElseThrow();
+        if (sum % minBanknoteValue != 0) {
+            throw new BadRequestException("Required sum multiple " + minBanknoteValue);
         }
     }
 

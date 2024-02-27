@@ -44,11 +44,12 @@ class AtmTest {
     }
 
     @Test
-    @DisplayName("ATM balance should be 3200 after deposit 4000 and withdrawing 1500")
+    @DisplayName("ATM balance should be 3200 after deposit 5000 and withdrawing 1800")
     void should2500Balance() {
         int expectedBalance = 3200;
         atmService.depositMoney(banknotes);
-        int actualBalance = atmService.getMoney(1800);
+        atmService.getMoney(1800);
+        int actualBalance = atmService.showMoney();
         Assertions.assertEquals(expectedBalance, actualBalance);
     }
 

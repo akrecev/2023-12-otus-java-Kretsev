@@ -24,6 +24,7 @@ public class SimpleAtmServiceImpl implements AtmService {
     @Override
     public int getMoney(int sum) {
         validation(sum);
+
         Map<Banknote, Integer> receivedMoney = new EnumMap<>(Banknote.class);
         for (Map.Entry<Banknote, Integer> banknotes : storage.showMeTheMoney().entrySet()) {
             int requiredAmount = sum / banknotes.getKey().nominal;
@@ -44,7 +45,7 @@ public class SimpleAtmServiceImpl implements AtmService {
 
         storage.giveMeTheMoney(receivedMoney);
 
-        return showMoney();
+        return sum;
     }
 
     @Override
