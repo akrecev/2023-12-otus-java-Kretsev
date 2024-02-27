@@ -10,16 +10,17 @@ import ru.otus.atm.exception.BadRequestException;
 import ru.otus.atm.exception.NotEnoughBanknotesException;
 import ru.otus.atm.model.Banknote;
 import ru.otus.atm.repository.impl.SimpleBanknoteStorageImpl;
+import ru.otus.atm.service.AtmService;
 import ru.otus.atm.service.impl.SimpleAtmServiceImpl;
 
 class AtmTest {
 
-    private AtmController atmController;
+    private AtmService atmService;
     private Map<Banknote, Integer> banknotes;
 
     @BeforeEach
     void setUp() {
-        atmController = new AtmController(new SimpleAtmServiceImpl(new SimpleBanknoteStorageImpl()));
+        atmService = new SimpleAtmServiceImpl(new SimpleBanknoteStorageImpl());
         banknotes = new EnumMap<>(Banknote.class);
         banknotes.put(Banknote.BN_1000, 2);
         banknotes.put(Banknote.BN_500, 2);
@@ -30,7 +31,7 @@ class AtmTest {
     @DisplayName("ATM balance should be zero")
     void shouldZeroBalance() {
         int expectedBalance = 0;
-        int actualBalance = atmController.show();
+        int actualBalance = atmService.showMoney();
         Assertions.assertEquals(expectedBalance, actualBalance);
     }
 
@@ -38,7 +39,7 @@ class AtmTest {
     @DisplayName("ATM balance should be 5000 after deposit")
     void should4000Balance() {
         int expectedBalance = 5000;
-        int actualBalance = atmController.deposit(banknotes);
+        int actualBalance = atmService.depositMoney(banknotes);
         Assertions.assertEquals(expectedBalance, actualBalance);
     }
 
@@ -46,22 +47,22 @@ class AtmTest {
     @DisplayName("ATM balance should be 3200 after deposit 4000 and withdrawing 1500")
     void should2500Balance() {
         int expectedBalance = 3200;
-        atmController.deposit(banknotes);
-        int actualBalance = atmController.get(1800);
+        atmService.depositMoney(banknotes);
+        int actualBalance = atmService.getMoney(1800);
         Assertions.assertEquals(expectedBalance, actualBalance);
     }
 
     @Test
     @DisplayName("Should be thrown NotEnoughBanknotesException")
     void shouldNotEnoughBanknotesException() {
-        atmController.deposit(banknotes);
-        Assertions.assertThrows(NotEnoughBanknotesException.class, () -> atmController.get(10000));
+        atmService.depositMoney(banknotes);
+        Assertions.assertThrows(NotEnoughBanknotesException.class, () -> atmService.getMoney(10000));
     }
 
     @Test
     @DisplayName("Should be thrown BadRequestException")
     void shouldBadRequestException() {
-        atmController.deposit(banknotes);
-        Assertions.assertThrows(BadRequestException.class, () -> atmController.get(101));
+        atmService.depositMoney(banknotes);
+        Assertions.assertThrows(BadRequestException.class, () -> atmService.getMoney(101));
     }
 }
