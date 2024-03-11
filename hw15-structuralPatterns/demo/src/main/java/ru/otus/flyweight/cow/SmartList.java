@@ -18,7 +18,6 @@ public class SmartList {
         data.users += 1;
     }
 
-
     public int get(int n) {
         return data.data.get(n);
     }
@@ -51,7 +50,6 @@ public class SmartList {
         }
     }
 
-
     public static void main(String[] args) {
         var a = new SmartList();
         a.add(1);
@@ -64,5 +62,4 @@ public class SmartList {
         System.out.println(a.size());
         System.out.println(b.size());
     }
-
 }

@@ -1,6 +1,5 @@
 package ru.otus.flyweight;
 
-
 public class ObjectFactory {
     private final HeavyCommonPart heavyCommonPart;
 

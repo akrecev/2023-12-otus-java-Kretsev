@@ -24,8 +24,6 @@ public class HeavyObjectImpl implements HeavyObject {
 
     @Override
     public String toString() {
-        return "HeavyObject{" +
-                "value='" + value + '\'' +
-                '}';
+        return "HeavyObject{" + "value='" + value + '\'' + '}';
     }
 }

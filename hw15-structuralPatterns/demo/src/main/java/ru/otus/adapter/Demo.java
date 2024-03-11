@@ -32,7 +32,6 @@ package ru.otus.adapter;
  * </p>
  * <img src="https://torg123.ru/upload/iblock/72d/72d4708464550764716a52b173c24f57.jpg"/>
  */
-
 public class Demo {
     public static void main(String[] args) {
         new Demo().usePattern();

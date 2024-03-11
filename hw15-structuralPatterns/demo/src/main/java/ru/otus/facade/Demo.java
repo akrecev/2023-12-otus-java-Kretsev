@@ -9,7 +9,7 @@ public class Demo {
     public static void main(String[] args) {
         Integer i1 = 127;
         Integer i2 = 128;
-        i2 -=1;
+        i2 -= 1;
 
         System.out.println(i1 == i2);
 

@@ -1,11 +1,9 @@
 package ru.otus.proxy.lazy;
 
-
 public class Demo {
     public static void main(String[] args) {
         lazy();
     }
-
 
     private static void lazy() {
         HeavyObject heavyObject = new HeavyObjectImpl();
