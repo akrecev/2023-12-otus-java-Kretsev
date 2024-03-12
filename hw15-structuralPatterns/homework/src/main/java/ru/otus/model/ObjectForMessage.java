@@ -15,8 +15,6 @@ public class ObjectForMessage {
 
     @Override
     public String toString() {
-        return "ObjectForMessage{" +
-                "data=" + data +
-                '}';
+        return "ObjectForMessage{" + "data=" + data + '}';
     }
 }
