@@ -1,16 +1,15 @@
 package ru.otus.handler;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.otus.model.Message;
 import ru.otus.processor.homework.exception.EvenSecondException;
 import ru.otus.processor.homework.processor.ProcessorReplaceFields;
 import ru.otus.processor.homework.processor.TimeProcessor;
-
-import java.time.LocalDateTime;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class HomeWorkProcessorsTest {
 
