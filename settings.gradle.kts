@@ -18,6 +18,7 @@ include("hw15-structuralPatterns:demo")
 include("hw15-structuralPatterns:homework")
 include("hw16-io:demo")
 include("hw16-io:homework")
+include("hw17-nio")
 
 pluginManagement {
     val jgitver: String by settings
