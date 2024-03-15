@@ -3,7 +3,6 @@ package ru.otus.listener;
 import ru.otus.model.Message;
 
 public interface Listener {
-
     void onUpdated(Message msg);
 
     // todo: 4. Сделать Listener для ведения истории (подумайте, как сделать, чтобы сообщения не портились)
