@@ -24,7 +24,7 @@ public class HomeWork {
          Для него уже есть тест, убедитесь, что тест проходит
     */
 
-    public static void main(String[] args) {`
+    public static void main(String[] args) {
         /*
           по аналогии с Demo.class
           из элементов "to do" создать new ComplexProcessor и обработать сообщение
