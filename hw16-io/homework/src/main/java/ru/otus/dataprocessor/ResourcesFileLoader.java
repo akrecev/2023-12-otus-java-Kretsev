@@ -17,8 +17,12 @@ public class ResourcesFileLoader implements Loader {
     }
 
     @Override
-    public List<Measurement> load() throws IOException {
-        return mapper.readValue(
-                ResourcesFileLoader.class.getClassLoader().getResource(fileName), new TypeReference<>() {});
+    public List<Measurement> load() {
+        try {
+            return mapper.readValue(
+                    ResourcesFileLoader.class.getClassLoader().getResource(fileName), new TypeReference<>() {});
+        } catch (IOException e) {
+            throw new FileProcessException(e);
+        }
     }
 }
