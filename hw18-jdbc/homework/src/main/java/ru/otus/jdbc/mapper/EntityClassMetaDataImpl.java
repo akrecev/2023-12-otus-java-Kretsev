@@ -13,6 +13,7 @@ import static java.util.function.Predicate.not;
 public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
     private final Class<T> clazz;
 
+    // TODO Как узнать тип без передачи экземпляра класса в конструктор?
     public EntityClassMetaDataImpl(Class<T> clazz) {
         this.clazz = clazz;
     }
