@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 import static java.util.function.Predicate.not;
 
 public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
+    // TODO нужно ли выделять поля для передачи данных в entitySQLMetaDataManager?
+    //  или хватит геттеров, которые берут данные напрямую из clazz?
     private final Class<T> clazz;
 
     // TODO Как узнать тип без передачи экземпляра класса в конструктор?
@@ -26,7 +28,7 @@ public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
     @Override
     public Constructor<T> getConstructor() {
         try {
-            return clazz.getConstructor(clazz.getFields().getClass());
+            return clazz.getConstructor(clazz.getDeclaredFields().getClass());
         } catch (NoSuchMethodException e) {
             throw new RuntimeException("Exception getting constructor", e);
         }
