@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import ru.otus.jdbc.annotations.Id;
+import ru.otus.crm.annotations.Id;
 
 public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
     // TODO нужно ли выделять поля для передачи данных в entitySQLMetaDataManager?
