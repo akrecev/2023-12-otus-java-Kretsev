@@ -1,21 +1,20 @@
 package ru.otus.jdbc.mapper;
 
-import ru.otus.jdbc.annotations.Id;
+import static java.util.function.Predicate.not;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static java.util.function.Predicate.not;
+import ru.otus.jdbc.annotations.Id;
 
 public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
-    // TODO нужно ли выделять поля для передачи данных в entitySQLMetaDataManager?
-    //  или хватит геттеров, которые берут данные напрямую из clazz?
+    // TODO РЅСѓР¶РЅРѕ Р»Рё РІС‹РґРµР»СЏС‚СЊ РїРѕР»СЏ РґР»СЏ РїРµСЂРµРґР°С‡Рё РґР°РЅРЅС‹С… РІ entitySQLMetaDataManager?
+    // РёР»Рё С…РІР°С‚РёС‚ РіРµС‚С‚РµСЂРѕРІ, РєРѕС‚РѕСЂС‹Рµ Р±РµСЂСѓС‚ РґР°РЅРЅС‹Рµ РЅР°РїСЂСЏРјСѓСЋ РёР· clazz?
     private final Class<T> clazz;
 
-    // TODO Как узнать тип без передачи экземпляра класса в конструктор?
+    // TODO РљР°Рє СѓР·РЅР°С‚СЊ С‚РёРї Р±РµР· РїРµСЂРµРґР°С‡Рё СЌРєР·РµРјРїР»СЏСЂР° РєР»Р°СЃСЃР° РІ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ?
     public EntityClassMetaDataImpl(Class<T> clazz) {
         this.clazz = clazz;
     }
