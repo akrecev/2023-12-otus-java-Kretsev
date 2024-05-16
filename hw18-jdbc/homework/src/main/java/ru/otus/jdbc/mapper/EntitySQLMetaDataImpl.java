@@ -1,29 +1,38 @@
 package ru.otus.jdbc.mapper;
 
-public class EntitySQLMetaDataImpl implements EntitySQLMetaData {
-    private final EntityClassMetaData metaData;
+import java.lang.reflect.Field;
+import java.util.stream.Collectors;
 
-    public EntitySQLMetaDataImpl(EntityClassMetaData metaData) {
-        this.metaData = metaData;
+public class EntitySQLMetaDataImpl implements EntitySQLMetaData {
+    private final String tableName;
+    private final String idFieldName;
+    private final String fields;
+    private final String params;
+
+    public EntitySQLMetaDataImpl(EntityClassMetaData<?> metaData) {
+        this.tableName = metaData.getName().toLowerCase();
+        this.idFieldName = metaData.getIdField().getName();
+        this.fields = metaData.getAllFields().stream().map(Field::getName).collect(Collectors.joining(", "));
+        this.params = metaData.getAllFields().stream().map(f -> "?").collect(Collectors.joining(", "));
     }
 
     @Override
     public String getSelectAllSql() {
-        return "";
+        return String.format("select * from %s", tableName);
     }
 
     @Override
     public String getSelectByIdSql() {
-        return "";
+        return String.format("select * from %s where %s = ?", tableName, idFieldName);
     }
 
-    @Override
+    @Override // insert into test(id, name) values (?, ?)
     public String getInsertSql() {
-        return "";
+        return String.format("insert into %s(%s) values (%s)", tableName, fields, params);
     }
 
-    @Override
+    @Override // update client set name = ? where id = ?
     public String getUpdateSql() {
-        return "";
+        return String.format("update %s set (%s) = (%s) where %s = ?", tableName, fields, params, idFieldName);
     }
 }
