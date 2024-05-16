@@ -37,7 +37,7 @@ public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
         return Arrays.stream(clazz.getDeclaredFields())
                 .filter(f -> f.isAnnotationPresent(Id.class))
                 .findFirst()
-                .orElseThrow();
+                .orElseThrow(() -> new RuntimeException("Field not found"));
     }
 
     @Override
