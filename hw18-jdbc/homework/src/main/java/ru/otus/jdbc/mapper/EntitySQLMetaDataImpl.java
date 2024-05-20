@@ -8,12 +8,18 @@ public class EntitySQLMetaDataImpl implements EntitySQLMetaData {
     private final String idFieldName;
     private final String fields;
     private final String params;
+    private final String fieldsWithoutId;
+    private final String paramsWithoutId;
 
     public EntitySQLMetaDataImpl(EntityClassMetaData<?> metaData) {
         this.tableName = metaData.getName().toLowerCase();
         this.idFieldName = metaData.getIdField().getName();
         this.fields = metaData.getAllFields().stream().map(Field::getName).collect(Collectors.joining(", "));
         this.params = metaData.getAllFields().stream().map(f -> "?").collect(Collectors.joining(", "));
+        this.fieldsWithoutId =
+                metaData.getFieldsWithoutId().stream().map(Field::getName).collect(Collectors.joining(", "));
+        this.paramsWithoutId =
+                metaData.getFieldsWithoutId().stream().map(f -> "?").collect(Collectors.joining(", "));
     }
 
     @Override
@@ -28,7 +34,7 @@ public class EntitySQLMetaDataImpl implements EntitySQLMetaData {
 
     @Override // insert into test(id, name) values (?, ?)
     public String getInsertSql() {
-        return String.format("insert into %s(%s) values (%s)", tableName, fields, params);
+        return String.format("insert into %s(%s) values (%s)", tableName, fieldsWithoutId, paramsWithoutId);
     }
 
     @Override // update client set name = ? where id = ?

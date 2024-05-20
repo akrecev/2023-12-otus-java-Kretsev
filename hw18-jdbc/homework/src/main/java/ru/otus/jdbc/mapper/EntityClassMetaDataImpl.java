@@ -27,7 +27,9 @@ public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
     @Override
     public Constructor<T> getConstructor() {
         try {
-            return clazz.getConstructor(clazz.getDeclaredFields().getClass());
+            var types =
+                    Arrays.stream(clazz.getDeclaredFields()).map(Field::getType).toList();
+            return clazz.getDeclaredConstructor(types.toArray(Class[]::new));
         } catch (NoSuchMethodException e) {
             throw new RuntimeException("Exception getting constructor", e);
         }
@@ -43,7 +45,7 @@ public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
 
     @Override
     public List<Field> getAllFields() {
-        return Arrays.stream(clazz.getDeclaredFields()).toList();
+        return List.of(clazz.getDeclaredFields());
     }
 
     @Override
