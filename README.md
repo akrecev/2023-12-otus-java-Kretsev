@@ -11,4 +11,5 @@
 ### 6. Эмулятор банкомата - модуль "hw12-solid"
 ### 7. Обработчик сообщений - модуль "hw15-structuralPatterns/homework"
 ### 8. Обработчик json-ов - модуль "hw16-io/homework"
+### 9. Самодельный ORM - модуль "hw18-jdbc/homework"
 
