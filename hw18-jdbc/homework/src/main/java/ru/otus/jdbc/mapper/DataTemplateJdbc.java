@@ -19,10 +19,10 @@ public class DataTemplateJdbc<T> implements DataTemplate<T> {
 
     private final DbExecutor dbExecutor;
     private final EntitySQLMetaData entitySQLMetaData;
-    private final EntityClassMetaData<?> entityClassMetaData;
+    private final EntityClassMetaData<T> entityClassMetaData;
 
     public DataTemplateJdbc(
-            DbExecutor dbExecutor, EntitySQLMetaData entitySQLMetaData, EntityClassMetaData<?> entityClassMetaData) {
+            DbExecutor dbExecutor, EntitySQLMetaData entitySQLMetaData, EntityClassMetaData<T> entityClassMetaData) {
         this.dbExecutor = dbExecutor;
         this.entitySQLMetaData = entitySQLMetaData;
         this.entityClassMetaData = entityClassMetaData;
@@ -86,7 +86,7 @@ public class DataTemplateJdbc<T> implements DataTemplate<T> {
             for (Field field : entityClassMetaData.getAllFields()) {
                 args.add(resultSet.getObject(field.getName()));
             }
-            entity = (T) entityClassMetaData.getConstructor().newInstance(args.toArray());
+            entity = entityClassMetaData.getConstructor().newInstance(args.toArray());
         } catch (InstantiationException
                 | IllegalAccessException
                 | IllegalArgumentException
