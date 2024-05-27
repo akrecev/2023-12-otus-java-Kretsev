@@ -10,11 +10,8 @@ import java.util.stream.Collectors;
 import ru.otus.crm.annotations.Id;
 
 public class EntityClassMetaDataImpl<T> implements EntityClassMetaData<T> {
-    // TODO нужно ли выделять поля для передачи данных в entitySQLMetaDataManager?
-    // TODO или хватит геттеров, которые берут данные напрямую из clazz?
     private final Class<T> clazz;
 
-    // TODO Возможно ли узнать тип <T> без передачи экземпляра класса в конструктор?
     public EntityClassMetaDataImpl(Class<T> clazz) {
         this.clazz = clazz;
     }
