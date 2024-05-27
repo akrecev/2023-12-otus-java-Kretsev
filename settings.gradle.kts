@@ -1,4 +1,4 @@
-rootProject.name = "otus-java-Kretsev"
+rootProject.name = "2023-12-otus-java-Kretsev"
 include("hw01-gradle")
 include("hw02-logging")
 include("hw03-qa")
